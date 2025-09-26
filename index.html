@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio mit Wort-Highlighting und Div-Modulen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            padding-bottom: 150px;
+        }
+        .header-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .audio-player-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            text-align: center;
+        }
+        audio {
+            width: 100%;
+            border-radius: 10px;
+        }
+        #textDisplay {
+            border: 1px solid #ccc;
+            padding: 15px;
+            min-height: 100px;
+            font-size: 1.2em;
+            white-space: normal;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .word-pair {
+            display: inline-block;
+            margin: 0 10px 15px 0;
+            vertical-align: top;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .current-word {
+            background-color: #add8e6;
+            font-weight: bold;
+            border-radius: 4px;
+            padding: 2px 5px;
+        }
+        .vietnamese-word, .german-translation {
+            display: block;
+            padding: 2px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .toggle-btn, .speed-btn {
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .toggle-btn:hover, .speed-btn:hover {
+            background-color: #e0e0e0;
+        }
+        .toggle-btn.active, .speed-btn.active {
+            background-color: #add8e6;
+            border-color: #7db8d1;
+        }
+        .player-fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 15px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid #ccc;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="Header.png" alt="Ein dekoratives Bild für den Header." class="header-image">
+
+    
+
+
+
+    
+    <div id="textDisplay">
+        <style>font-color: blue; </style>
+
+
+
+        
+<div class="word-pair" data-start-time="93" data-end-time="360">
+    <span class="german-translation">Guten</span>
+    <span class="vietnamese-word">Tốt</span>
+</div>
+<div class="word-pair" data-start-time="360" data-end-time="700">
+    <span class="german-translation">Tag.</span>
+    <span class="vietnamese-word">Ngày.</span>
+</div><br>
+<div class="word-pair" data-start-time="1006" data-end-time="1320">
+    <span class="german-translation">Guten</span>
+    <span class="vietnamese-word">Tốt</span>
+</div>
+<div class="word-pair" data-start-time="1320" data-end-time="1700">
+    <span class="german-translation">Tag,</span>
+    <span class="vietnamese-word">Ngày,</span>
+</div>
+<div class="word-pair" data-start-time="1946" data-end-time="2200">
+    <span class="german-translation">Herr</span>
+    <span class="vietnamese-word">Ngài</span>
+</div>
+<div class="word-pair" data-start-time="2200" data-end-time="2600">
+    <span class="german-translation">Bauer.</span>
+    <span class="vietnamese-word">Bauer.</span>
+</div>
+<div class="word-pair" data-start-time="2806" data-end-time="3100">
+    <span class="german-translation">Wie</span>
+    <span class="vietnamese-word">Thế nào</span>
+</div>
+<div class="word-pair" data-start-time="3100" data-end-time="3339">
+    <span class="german-translation">kann</span>
+    <span class="vietnamese-word">có thể</span>
+</div>
+<div class="word-pair" data-start-time="3339" data-end-time="3480">
+    <span class="german-translation">ich</span>
+    <span class="vietnamese-word">tôi</span>
+</div>
+<div class="word-pair" data-start-time="3480" data-end-time="3660">
+    <span class="german-translation">Ihnen</span>
+    <span class="vietnamese-word">bạn</span>
+</div>
+<div class="word-pair" data-start-time="3660" data-end-time="4080">
+    <span class="german-translation">helfen?</span>
+    <span class="vietnamese-word">giúp?</span>
+</div><br>
+<div class="word-pair" data-start-time="4573" data-end-time="4940">
+    <span class="german-translation">Vielen</span>
+    <span class="vietnamese-word">Nhiều</span>
+</div>
+<div class="word-pair" data-start-time="4940" data-end-time="5240">
+    <span class="german-translation">Dank.</span>
+    <span class="vietnamese-word">Cảm ơn.</span>
+</div><br>
+<div class="word-pair" data-start-time="5526" data-end-time="5900">
+    <span class="german-translation">Gern</span>
+    <span class="vietnamese-word">Vui</span>
+</div>
+<div class="word-pair" data-start-time="5900" data-end-time="6419">
+    <span class="german-translation">geschehen.</span>
+    <span class="vietnamese-word">lòng.</span>
+</div><br>
+<div class="word-pair" data-start-time="6593" data-end-time="7000">
+    <span class="german-translation">Einen</span>
+    <span class="vietnamese-word">Một</span>
+</div>
+<div class="word-pair" data-start-time="7000" data-end-time="7339">
+    <span class="german-translation">schönen</span>
+    <span class="vietnamese-word">đẹp</span>
+</div>
+<div class="word-pair" data-start-time="7339" data-end-time="7599">
+    <span class="german-translation">Tag</span>
+    <span class="vietnamese-word">ngày</span>
+</div>
+<div class="word-pair" data-start-time="7599" data-end-time="7900">
+    <span class="german-translation">noch.</span>
+    <span class="vietnamese-word">nữa.</span>
+</div>
+
+
+
+
+
+        
+        <div class="player-fixed-bottom">
+        <audio id="audioPlayer" controls>
+            <source src="My_Audio1.mp3" type="audio/mpeg">
+            Ihr Browser unterstützt das Audio-Element nicht.
+        </audio>
+        <div class="player-controls">
+            <button id="toggleVietnamese" class="toggle-btn active">Vietnamesisch an/aus</button>
+            <button id="toggleGerman" class="toggle-btn active">Deutsch an/aus</button>
+            <button class="speed-btn" data-speed="0.5">0.5x</button>
+            <button class="speed-btn" data-speed="1.0">1.0x</button>
+            <button class="speed-btn" data-speed="1.5">1.5x</button>
+            <button class="speed-btn" data-speed="2.0">2.0x</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const toggleVietnameseBtn = document.getElementById('toggleVietnamese');
+            const toggleGermanBtn = document.getElementById('toggleGerman');
+            const vietnameseWords = document.querySelectorAll('.vietnamese-word');
+            const germanWords = document.querySelectorAll('.german-translation');
+            const wordPairs = document.querySelectorAll('.word-pair');
+            const speedButtons = document.querySelectorAll('.speed-btn');
+
+            let lastHighlightedWord = null;
+
+            function toggleWords(elements, button) {
+                const isActive = button.classList.toggle('active');
+                elements.forEach(el => {
+                    el.classList.toggle('hidden', !isActive);
+                });
+            }
+
+            toggleVietnameseBtn.addEventListener('click', () => {
+                toggleWords(vietnameseWords, toggleVietnameseBtn);
+            });
+
+            toggleGermanBtn.addEventListener('click', () => {
+                toggleWords(germanWords, toggleGermanBtn);
+            });
+
+            audioPlayer.addEventListener('timeupdate', () => {
+                const currentTime = audioPlayer.currentTime * 1000;
+                
+                let found = false;
+                wordPairs.forEach(pair => {
+                    const startTime = parseInt(pair.dataset.startTime, 10);
+                    const endTime = parseInt(pair.dataset.endTime, 10);
+
+                    if (currentTime >= startTime && currentTime <= endTime) {
+                        if (lastHighlightedWord !== pair) {
+                            if (lastHighlightedWord) {
+                                lastHighlightedWord.classList.remove('current-word');
+                            }
+                            pair.classList.add('current-word');
+                            lastHighlightedWord = pair;
+                            pair.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        found = true;
+                    }
+                });
+
+                if (!found && lastHighlightedWord) {
+                    lastHighlightedWord.classList.remove('current-word');
+                    lastHighlightedWord = null;
+                }
+            });
+
+            speedButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const speed = parseFloat(button.dataset.speed);
+                    audioPlayer.playbackRate = speed;
+                    
+                    speedButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+
+            audioPlayer.playbackRate = 1.0;
+            const defaultSpeedButton = document.querySelector('.speed-btn[data-speed="1.0"]');
+            if (defaultSpeedButton) {
+                defaultSpeedButton.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
